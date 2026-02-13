@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Noemí 💖</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #ff9ad5, #ff4d6d);
+    overflow: hidden;
+    text-align: center;
+    color: white;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+/* Pantalla inicial */
+#inicio {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #ff4d6d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 10;
+    padding: 20px;
+}
+
+#inicio h1 {
+    font-size: clamp(28px, 8vw, 48px);
+    margin-bottom: 30px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+#inicio button {
+    padding: 20px 40px;
+    font-size: clamp(18px, 5vw, 28px);
+    border: none;
+    border-radius: 40px;
+    background: white;
+    color: #ff4d6d;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+#inicio button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+#inicio button:active {
+    transform: scale(0.95);
+}
+
+/* Carta */
+#carta {
+    display: none;
+    padding: clamp(20px, 5vw, 60px);
+    animation: fadeIn 2s ease-in;
+    max-height: 100vh;
+    overflow-y: auto;
+    padding-bottom: 80px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+h1 {
+    font-size: clamp(32px, 8vw, 48px);
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: clamp(24px, 6vw, 36px);
+    margin-top: 40px;
+}
+
+.poema {
+    font-size: clamp(16px, 4vw, 22px);
+    max-width: 700px;
+    margin: 30px auto;
+    line-height: 1.8;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.poema em {
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.boton {
+    background: white;
+    color: #ff4d6d;
+    padding: 15px 40px;
+    font-size: clamp(18px, 5vw, 22px);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+    margin: 20px 10px;
+}
+
+.boton:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.boton:active {
+    transform: scale(0.95);
+}
+
+/* Corazones */
+.corazon {
+    position: fixed;
+    font-size: 20px;
+    animation: flotar 6s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes flotar {
+    0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-10vh) translateX(100px);
+        opacity: 0;
+    }
+}
+
+/* Confeti */
+.confeti {
+    position: fixed;
+    pointer-events: none;
+    font-size: 30px;
+    animation: caerConfeti 3s ease-in forwards;
+}
+
+@keyframes caerConfeti {
+    0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* Audio control */
+#audioControl {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 5;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+#audioControl:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #carta {
+        padding-top: 20px;
+    }
+    
+    .poema {
+        padding: 20px;
+    }
+    
+    #audioControl {
+        bottom: 10px;
+        right: 10px;
+        padding: 8px 12px;
+        font-size: 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Audio con control -->
+<audio id="musicaFondo" loop volume="0.5">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<button id="audioControl" onclick="toggleAudio()">🔊</button>
+
+<div id="inicio">
+    <h1>💌 Tengo algo secreto para ti 💌</h1>
+    <button onclick="abrirCarta()">Ábreme 💖</button>
+</div>
+
+<div id="carta">
+    <h1>💖 Para Noemí 💖</h1>
+
+    <div class="poema">
+        <em>"La noche tiene la forma de un grito de lobo."</em><br>
+        — Alejandra Pizarnik
+        <br><br>
+
+        En el silencio donde florece tu nombre,<br>
+        descubro un universo que respira ternura.<br>
+        Tu sonrisa ilumina mis sombras,<br>
+        y tu mirada convierte lo simple en eterno.<br><br>
+
+        Si el amor es un misterio,<br>
+        quiero vivirlo contigo.
+    </div>
+
+    <h1>¿Quieres ser mi San Valentín Noemí? 💗</h1>
+
+    <button class="boton" onclick="respuestaSi()">
+        Sí 💌
+    </button>
+    
+    <button class="boton" onclick="respuestaNo()">
+        No 💔
+    </button>
+
+    <h2 style="margin-top: 40px;">Con amor, David 💘</h2>
+</div>
+
+<script>
+// Música
+const audio = document.getElementById('musicaFondo');
+let musicaEncendida = false;
+
+function toggleAudio() {
+    const btn = document.getElementById('audioControl');
+    if (musicaEncendida) {
+        audio.pause();
+        btn.textContent = '🔇';
+        musicaEncendida = false;
+    } else {
+        audio.play().catch(e => console.log('No se pudo reproducir audio:', e));
+        btn.textContent = '🔊';
+        musicaEncendida = true;
+    }
+}
+
+// Abrir carta
+function abrirCarta() {
+    document.getElementById('inicio').style.display = 'none';
+    document.getElementById('carta').style.display = 'block';
+    
+    // Intentar reproducir música automáticamente
+    setTimeout(() => {
+        audio.play().catch(e => {
+            console.log('Autoplay bloqueado. Usuario debe hacer clic en el botón de audio');
+        });
+        musicaEncendida = true;
+        document.getElementById('audioControl').textContent = '🔊';
+    }, 500);
+}
+
+// Respuesta Sí
+function respuestaSi() {
+    crearConfeti(50);
+    alert('💖 ¡Eso es increíble! Con amor, David 💖');
+}
+
+// Respuesta No
+function respuestaNo() {
+    alert('Está bien 💔 Pero siempre estaré aquí si cambias de opinión 💕');
+}
+
+// Confeti
+function crearConfeti(cantidad) {
+    const emojis = ['💖', '💕', '💗', '💝', '✨', '🌹', '💌'];
+    
+    for (let i = 0; i < cantidad; i++) {
+        setTimeout(() => {
+            const confeti = document.createElement('div');
+            confeti.classList.add('confeti');
+            confeti.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            confeti.style.left = Math.random() * 100 + 'vw';
+            confeti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            confeti.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            document.body.appendChild(confeti);
+            
+            setTimeout(() => confeti.remove(), 4000);
+        }, i * 30);
+    }
+}
+
+// Corazones flotando
+function crearCorazon() {
+    const corazon = document.createElement('div');
+    corazon.classList.add('corazon');
+    corazon.innerHTML = '💗';
+    corazon.style.left = Math.random() * 100 + 'vw';
+    corazon.style.fontSize = (Math.random() * 20 + 10) + 'px';
+    corazon.style.animationDuration = (Math.random() * 3 + 3) + 's';
+    document.body.appendChild(corazon);
+    
+    setTimeout(() => corazon.remove(), 6000);
+}
+
+setInterval(crearCorazon, 300);
+</script>
+
+</body>
+</html> 
